@@ -1,4 +1,3 @@
-// app/services/page.js
 export default function ServicesSharp() {
   const services = [
     {
@@ -23,6 +22,36 @@ export default function ServicesSharp() {
     },
   ];
 
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    card.style.transform = `
+      translateY(-16px) 
+      rotateX(${rotateX}deg) 
+      rotateY(${rotateY}deg) 
+      scale(1.05)
+    `;
+
+    // Move the light effect
+    const light = card.querySelector('.light-effect');
+    if (light) {
+      const xPercent = (x / rect.width) * 100;
+      const yPercent = (y / rect.height) * 100;
+      light.style.transform = `translate(${xPercent - 50}%, ${yPercent - 50}%)`;
+    }
+  };
+
+  const handleMouseLeave = (e) => {
+    e.currentTarget.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+  };
+
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -37,44 +66,61 @@ export default function ServicesSharp() {
           </h2>
         </div>
 
-        {/* 4 SHARP Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* 3D TILT + REALISTIC LIGHTING CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style={{ perspective: '1500px' }}>
           {services.map((s, i) => (
             <div
               key={i}
-              className="group bg-white/5 border border-white/10 p-8
-                         hover:bg-[#e55a24]/5 hover:border-[#e55a24] hover:-translate-y-3
-                         transition-all duration-300"
+              className="group relative p-8 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl
+                         transition-all duration-700 ease-out
+                         hover:border-[#e55a24]/40"
+              style={{
+                transformStyle: 'preserve-3d',
+                willChange: 'transform',
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
             >
-              {/* Orange top bar */}
-              <div className="h-1 bg-[#e55a24] mb-6 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+              {/* Realistic light reflection following cursor */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div
+                  className="light-effect absolute w-[200%] h-[200%] -left-1/2 -top-1/2 transition-transform duration-200 ease-out"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(229, 90, 36, 0.4) 0%, transparent 50%)',
+                  }}
+                />
+              </div>
 
-              {/* Icon box */}
+              {/* Enhanced shadow and glow */}
+              <div className="pointer-events-none absolute -inset-1 bg-gradient-to-r from-[#e55a24]/0 via-[#e55a24]/30 to-[#e55a24]/0 
+                              opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl" />
+
+              {/* Orange bar */}
+              <div className="h-1 bg-[#e55a24] mb-6 scale-x-0 group-hover:scale-x-100 
+                              transition-transform origin-left duration-500" />
+
+              {/* Icon */}
               <div className="w-14 h-14 border-2 border-[#e55a24] flex items-center justify-center mb-6">
                 <svg className="w-8 h-8 text-[#e55a24]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={s.path} />
                 </svg>
               </div>
 
-              <h3 className="text-2xl font-black text-white mb-3">
-                {s.title}
-              </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {s.desc}
-              </p>
+              <h3 className="text-2xl font-black text-white mb-3">{s.title}</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Hero-style CTA */}
+        {/* CTA */}
         <div className="mt-16 text-center">
           <a
             href="#quote"
-            className="inline-flex items-center gap-3 bg-[#e55a24] hover:bg-[#c94d1d] text-white font-black px-12 py-5
+            className="group inline-flex items-center gap-3 bg-[#e55a24] hover:bg-[#c94d1d] text-white font-black px-12 py-5
                        shadow-2xl hover:shadow-[#e55a24]/40 transition-all duration-300"
           >
             START PROJECT
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
