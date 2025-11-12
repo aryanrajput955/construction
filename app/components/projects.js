@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from 'framer-motion';
+
 export default function Projects() {
   const projects = [
     { title: "Commercial Complex", category: "Commercial", image: "/img1.jpg" },
@@ -10,22 +14,31 @@ export default function Projects() {
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-16 animate-fade-in-up">
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="inline-block text-[color:var(--accent)] text-sm font-bold mb-4 border border-[color:var(--accent)] px-3 py-1">
             OUR WORK
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white">
             Featured Projects
           </h2>
-        </div>
+        </motion.div>
 
         {/* Grid */}
         <div className="grid md:grid-cols-2 gap-4">
           {projects.map((project, i) => (
-            <div
+            <motion.div
               key={i}
-              className="group relative cursor-pointer overflow-hidden bg-[#1a1a1a] h-80 animate-scale-in"
-              style={{ animationDelay: `${i * 0.15}s` }}
+              className="group relative cursor-pointer overflow-hidden bg-[#1a1a1a] h-80"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.12, duration: 0.6, ease: 'easeOut' }}
             >
               {/* Image */}
               <img
@@ -50,16 +63,22 @@ export default function Projects() {
               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-[color:var(--accent)] text-3xl opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500">
                 →
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center animate-fade-in-up animation-delay-4">
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <button className="border-2 border-[color:var(--accent)] text-[color:var(--accent)] px-12 py-3 font-bold hover:bg-[color:var(--accent)] hover:text-black transition-all duration-300">
             VIEW ALL PROJECTS
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

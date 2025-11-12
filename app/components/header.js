@@ -5,20 +5,43 @@ import { useState, useEffect } from "react"
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
+    
+    // Check for saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
+      setIsDark(true)
+      document.documentElement.classList.add('dark')
+    } else {
+      setIsDark(false)
+      document.documentElement.classList.remove('dark')
+    }
   }, [])
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+      setIsDark(false)
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+      setIsDark(true)
+    }
+  }
 
   const navLinks = [
     { name: "Home", href: "#home" },
-    { name: "About Us", href: "#mission" },
-    { name: "Services", href: "#projects" },
-    { name: "Contact Us", href: "#footer" },
+    { name: "Our Works", href: "/our-works" },
+    { name: "Services", href: "/services" },
+    { name: "Contact Us", href: "/contact" },
   ]
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-b border-gray-800 z-50 transition-all duration-700 ${
+    <nav className={`fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-sm border-b border-border z-50 transition-all duration-700 ${
       isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -34,44 +57,83 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-gray-300 hover:text-white transition-colors"
+                className="text-sm text-foreground/80 hover:text-foreground transition-colors"
               >
                 {link.name}
               </a>
             ))}
+            
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                // Sun icon for light mode
+                <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                // Moon icon for dark mode
+                <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+
             <a
               href="#footer"
-              className="px-5 py-2 text-sm bg-white text-black hover:bg-gray-200 transition-colors"
+              className="px-5 py-2 text-sm bg-accent text-accent-foreground hover:bg-accent-dark transition-colors"
             >
               Get Started
             </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden text-gray-300 hover:text-white"
-            aria-label="Toggle menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <div className="md:hidden flex items-center gap-3">
+            {/* Theme Toggle Button (Mobile) */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
               )}
-            </svg>
-          </button>
+            </button>
+
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="text-foreground/80 hover:text-foreground"
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden border-t border-gray-800 py-4">
+          <div className="md:hidden border-t border-border py-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 text-sm text-gray-300 hover:text-white"
+                className="block px-4 py-2 text-sm text-foreground/80 hover:text-foreground"
               >
                 {link.name}
               </a>
@@ -79,7 +141,7 @@ export default function Navbar() {
             <a
               href="#footer"
               onClick={() => setIsOpen(false)}
-              className="block mx-4 mt-2 px-4 py-2 text-sm text-center bg-white text-black hover:bg-gray-200"
+              className="block mx-4 mt-2 px-4 py-2 text-sm text-center bg-accent text-accent-foreground hover:bg-accent-dark"
             >
               Get Started
             </a>

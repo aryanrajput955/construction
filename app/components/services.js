@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from 'framer-motion';
+
 export default function ServicesSharp() {
   const services = [
     {
@@ -57,19 +61,25 @@ export default function ServicesSharp() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="inline-block bg-[#e55a24] text-white text-xs font-black uppercase tracking-widest px-6 py-2 mb-4">
             CORE DIVISIONS
           </span>
           <h2 className="text-5xl md:text-6xl font-black text-white">
             We Build <span className="text-[#e55a24]">Tomorrow</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* 3D TILT + REALISTIC LIGHTING CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style={{ perspective: '1500px' }}>
           {services.map((s, i) => (
-            <div
+            <motion.div
               key={i}
               className="group relative p-8 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl
                          transition-all duration-700 ease-out
@@ -80,6 +90,10 @@ export default function ServicesSharp() {
               }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: 'easeOut' }}
             >
               {/* Realistic light reflection following cursor */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -92,7 +106,7 @@ export default function ServicesSharp() {
               </div>
 
               {/* Enhanced shadow and glow */}
-              <div className="pointer-events-none absolute -inset-1 bg-gradient-to-r from-[#e55a24]/0 via-[#e55a24]/30 to-[#e55a24]/0 
+              <div className="pointer-events-none absolute -inset-1 bg-linear-to-r from-[#e55a24]/0 via-[#e55a24]/30 to-[#e55a24]/0 
                               opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl" />
 
               {/* Orange bar */}
@@ -108,7 +122,7 @@ export default function ServicesSharp() {
 
               <h3 className="text-2xl font-black text-white mb-3">{s.title}</h3>
               <p className="text-gray-300 text-sm leading-relaxed">{s.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
