@@ -1,23 +1,34 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about-us' },
+    { name: 'Services', href: '/services' },
+    { name: 'Our Works', href: '/our-works' },
+    { name: 'Contact Us', href: '/contact' },
+  ]
+
   return (
     <footer id="footer" className="bg-black border-t border-[color:var(--border-color)]">
-      {/* Main Footer */}
       <div className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             {/* Company Info */}
             <div className="animate-fade-in-up">
-              <div className="flex items-center ">
-                <Link href="/" className="flex items-center ">
-                  <Image src="/logo2.png" alt="Front Ridge Logo" width={100} height={120} className="rounded-md" />
-                </Link>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <Link href="/" className="flex items-center mb-6">
+                <Image
+                  src="/logo2.png"
+                  alt="Front Ridge Logo"
+                  width={160}
+                  height={160}
+                  className="rounded-md"
+                />
+              </Link>
+              <p className="text-gray-400 text-sm -mt-16 leading-relaxed">
                 Building excellence through quality construction and professional expertise.
               </p>
             </div>
@@ -26,11 +37,11 @@ export default function Footer() {
             <div className="animate-fade-in-up animation-delay-1">
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-3">
-                {["Home", "About Us", "Services", "Projects"].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-gray-400 hover:text-[color:var(--accent)] transition-colors text-sm">
-                      {link}
-                    </a>
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className="text-gray-400 hover:text-[color:var(--accent)] transition-colors text-sm">
+                      {link.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -40,7 +51,7 @@ export default function Footer() {
             <div className="animate-fade-in-up animation-delay-2">
               <h4 className="text-white font-bold mb-6">Services</h4>
               <ul className="space-y-3">
-                {["Commercial", "Residential", "Industrial", "Renovation"].map((service) => (
+                {['Commercial', 'Residential', 'Industrial', 'Renovation'].map((service) => (
                   <li key={service}>
                     <a href="#" className="text-gray-400 hover:text-[color:var(--accent)] transition-colors text-sm">
                       {service}
@@ -57,17 +68,6 @@ export default function Footer() {
                 <p>Toronto, ON</p>
                 <p>(416) 555-0123</p>
                 <p>info@frontridge.com</p>
-                <div className="flex gap-4 mt-4">
-                  {["facebook", "linkedin", "instagram"].map((social) => (
-                    <a
-                      key={social}
-                      href="#"
-                      className="w-8 h-8 border border-[color:var(--border-color)] flex items-center justify-center hover:border-[color:var(--accent)] transition-colors"
-                    >
-                      <span className="text-xs">{social[0].toUpperCase()}</span>
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

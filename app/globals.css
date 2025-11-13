@@ -373,10 +373,20 @@ section.relative.min-h-screen p {
   animation-delay: 0.2s;
 }
 
+
+/* Utility to apply Geist font variable from layout.js */
+.font-geist {
+  font-family: var(--font-geist-sans) !important;
+}
 .animation-delay-3 {
   animation-delay: 0.3s;
 }
 
 .animation-delay-4 {
   animation-delay: 0.4s;
+}
+
+/* Force white headline for Hero2 to override theme rules */
+.white {
+  color: #ffffff !important;
 }

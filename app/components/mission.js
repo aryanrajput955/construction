@@ -257,7 +257,7 @@ export default function Mission() {
             Ready to start your journey?
           </p>
           <motion.button
-            className="bg-accent text-accent-foreground font-bold px-10 py-4 hover:bg-accent/90 transition-colors duration-300"
+            className="bg-accent text-[#ffff] cursor-pointer font-bold px-10 py-4 hover:bg-accent/90 transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}

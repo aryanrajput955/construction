@@ -97,7 +97,7 @@ export default function Hero() {
             transition={{ delay: 1.0, duration: 0.6 }}
             whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(229, 90, 36, 0.3)' }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[color:var(--accent)] text-black px-8 py-3 font-bold hover:bg-[color:var(--accent-dark)] transition-all duration-300 w-fit shadow-lg"
+            className="bg-[color:var(--accent)] text-[#ffff] cursor-pointer px-8 py-3 font-bold hover:bg-[color:var(--accent-dark)] transition-all duration-300 w-fit shadow-lg"
           >
             EXPLORE OUR WORK
           </motion.button>

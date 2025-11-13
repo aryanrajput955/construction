@@ -35,15 +35,14 @@ export default function ServicesSharp() {
     const centerY = rect.height / 2;
     const rotateX = (y - centerY) / 10;
     const rotateY = (centerX - x) / 10;
-    
+
     card.style.transform = `
-      translateY(-16px) 
+      translateY(-12px) 
       rotateX(${rotateX}deg) 
       rotateY(${rotateY}deg) 
-      scale(1.05)
+      scale(1.03)
     `;
 
-    // Move the light effect
     const light = card.querySelector('.light-effect');
     if (light) {
       const xPercent = (x / rect.width) * 100;
@@ -68,15 +67,15 @@ export default function ServicesSharp() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block bg-[#e55a24] text-white text-xs font-black uppercase tracking-widest px-6 py-2 mb-4">
-            CORE DIVISIONS
+      <span className="inline-block text-accent text-xs font-bold tracking-widest mb-4 border border-accent px-4 py-2 uppercase">
+         CORE DIVISIONS
           </span>
           <h2 className="text-5xl md:text-6xl font-black text-white">
             We Build <span className="text-[#e55a24]">Tomorrow</span>
           </h2>
         </motion.div>
 
-        {/* 3D TILT + REALISTIC LIGHTING CARDS */}
+        {/* 3D TILT + SUBTLE LIGHTING CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style={{ perspective: '1500px' }}>
           {services.map((s, i) => (
             <motion.div
@@ -95,19 +94,19 @@ export default function ServicesSharp() {
               viewport={{ once: true, amount: 0.18 }}
               transition={{ delay: i * 0.08, duration: 0.6, ease: 'easeOut' }}
             >
-              {/* Realistic light reflection following cursor */}
+              {/* Subtle light reflection following cursor */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div
-                  className="light-effect absolute w-[200%] h-[200%] -left-1/2 -top-1/2 transition-transform duration-200 ease-out"
+                  className="light-effect absolute w-[180%] h-[180%] -left-1/2 -top-1/2 transition-transform duration-200 ease-out"
                   style={{
-                    background: 'radial-gradient(circle at center, rgba(229, 90, 36, 0.4) 0%, transparent 50%)',
+                    background: 'radial-gradient(circle at center, rgba(229, 90, 36, 0.18) 0%, transparent 60%)',
                   }}
                 />
               </div>
 
-              {/* Enhanced shadow and glow */}
-              <div className="pointer-events-none absolute -inset-1 bg-linear-to-r from-[#e55a24]/0 via-[#e55a24]/30 to-[#e55a24]/0 
-                              opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl" />
+              {/* Reduced glow intensity and blur */}
+              <div className="pointer-events-none absolute -inset-1 bg-gradient-to-r from-[#e55a24]/0 via-[#e55a24]/12 to-[#e55a24]/0 
+                              opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 rounded-2xl" />
 
               {/* Orange bar */}
               <div className="h-1 bg-[#e55a24] mb-6 scale-x-0 group-hover:scale-x-100 
@@ -130,7 +129,7 @@ export default function ServicesSharp() {
         <div className="mt-16 text-center">
           <a
             href="#quote"
-            className="group inline-flex items-center gap-3 bg-[#e55a24] hover:bg-[#c94d1d] text-white font-black px-12 py-5
+            className="group inline-flex items-center gap-3 bg-[#e55a24] hover:bg-[#c94d1d] text-[#ffff] font-black px-12 py-5
                        shadow-2xl hover:shadow-[#e55a24]/40 transition-all duration-300"
           >
             START PROJECT

@@ -13,7 +13,7 @@ export default function Home() {
    <Mission />
    <Services />
     <Projects />
-    <Footer />
+
    </>
   );
 }
