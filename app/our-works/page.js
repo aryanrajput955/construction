@@ -35,7 +35,7 @@ function WorkCard({ work, index }) {
         <p className="text-muted-foreground leading-relaxed">{work.description}</p>
       </div>
 
-      {/* Decorative corners (same as ServiceCard) */}
+      {/* Decorative corners */}
       <div className="pointer-events-none absolute top-0 left-0 h-20 w-20 border-t-4 border-l-4 border-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-20 w-20 border-b-4 border-r-4 border-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </motion.div>
@@ -71,7 +71,7 @@ export default function OurWorkPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background py-24 px-4">
+    <div className="min-h-screen bg-background py-20 px-4 sm:px-6 lg:px-8">
       {/* Page Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -88,12 +88,12 @@ export default function OurWorkPage() {
         </p>
       </motion.div>
 
-      {/* Work Cards Grid */}
-      <div className="mx-auto max-w-7xl">
+      {/* Work Cards Grid – Responsive container with enhanced mobile spacing */}
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-0">
         <div className="grid gap-8 md:grid-cols-2">
-        {works.map((work, i) => (
-          <WorkCard key={i} work={work} index={i} />
-        ))}
+          {works.map((work, i) => (
+            <WorkCard key={i} work={work} index={i} />
+          ))}
         </div>
       </div>
     </div>

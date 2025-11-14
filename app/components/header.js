@@ -1,8 +1,10 @@
 'use client'
 
 import {useState, useEffect} from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
+	const pathname = usePathname()
 	const [isOpen, setIsOpen] = useState(false)
 	const [isVisible, setIsVisible] = useState(false)
 	const [isDark, setIsDark] = useState(false)
@@ -37,8 +39,8 @@ export default function Navbar() {
 		{name: 'Home', href: '/'},
 		{name: 'Our Works', href: '/our-works'},
 		{name: 'Services', href: '/services'},
+		{name: 'About Us', href: '/about-us'},
 		{name: 'Contact Us', href: '/contact'},
-		{name: ' About Us', href: '/about-us'},
 	]
 
 	return (
@@ -53,27 +55,34 @@ export default function Navbar() {
 						href='/'
 						className='flex items-center'>
 						<img
-							src='/logo2.png'
+							src={isDark ? '/logo2.png' : '/blacklogo.png'}
 							alt='Front Ridge Logo'
-							className='h-50 w-auto'
+							className='h-50 w-auto transition-opacity duration-300'
 						/>
 					</a>
 
 					{/* Desktop Menu */}
 					<div className='hidden md:flex items-center gap-8'>
-						{navLinks.map((link) => (
-							<a
-								key={link.name}
-								href={link.href}
-								className='text-sm text-foreground/80 hover:text-foreground transition-colors'>
-								{link.name}
-							</a>
-						))}
+						{navLinks.map((link) => {
+							const isActive = pathname === link.href
+							return (
+								<a
+									key={link.name}
+									href={link.href}
+									className={`text-sm transition-colors ${
+										isActive ? 'active-nav' : 'text-[#e55a24]/80 hover:text-[#e55a24]'
+									}`}
+									aria-current={isActive ? 'page' : undefined}
+								>
+									{link.name}
+								</a>
+							)
+						})}
 
 						{/* Theme Toggle Button */}
 						<button
 							onClick={toggleTheme}
-							className='p-2 rounded-lg hover:bg-muted transition-colors'
+							className='p-2 rounded-lg cursor-pointer  ease-in hover:bg-muted transition-colors'
 							aria-label='Toggle theme'>
 							{isDark ? (
 								// Sun icon for light mode
@@ -107,8 +116,8 @@ export default function Navbar() {
 						</button>
 
 						<a
-							href='#footer'
-							className='px-5 py-2 text-sm bg-accent text-accent-foreground hover:bg-accent-dark transition-colors'>
+							href='/contact'
+							className='px-5 py-2 text-sm bg-accent hover:bg-accent/10  hover:text-accent-foreground/10 text-accent-foreground  ease-in-out transition-all duration-300'>
 							Get Started
 						</a>
 					</div>
@@ -186,12 +195,16 @@ export default function Navbar() {
 								key={link.name}
 								href={link.href}
 								onClick={() => setIsOpen(false)}
-								className='block px-4 py-2 text-sm text-foreground/80 hover:text-foreground'>
+								className={`block px-4 py-2 text-sm ${
+									pathname === link.href
+										? 'text-accent font-bold'
+										: 'text-foreground/80 hover:text-foreground'
+								}`}>
 								{link.name}
 							</a>
 						))}
 						<a
-							href='#footer'
+							href='/contact'
 							onClick={() => setIsOpen(false)}
 							className='block mx-4 mt-2 px-4 py-2 text-sm text-center bg-accent text-accent-foreground hover:bg-accent-dark'>
 							Get Started

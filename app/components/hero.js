@@ -14,7 +14,7 @@ export default function Hero() {
 		return (
 			<section
 				id='home'
-				className='pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-black'>
+				className='pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden'>
 				<div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center'>
 					<div />
 					<div />
@@ -26,7 +26,7 @@ export default function Hero() {
 	return (
 		<section
 			id='home'
-			className='pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-black'>
+			className='pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden'>
 			<div className='max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center'>
 				{/* LEFT COLUMN – Vision & Value */}
 				<motion.div
@@ -71,7 +71,7 @@ export default function Hero() {
 							viewport={{once: true, amount: 0.3}}
 							transition={{delay: 0.7, duration: 0.6}}
 							className='text-gray-300 leading-relaxed mb-6'>
-							We don’t just construct buildings — we engineer "enduring
+							We don't just construct buildings — we engineer "enduring
 							landmarks" that stand the test of time. From concept to
 							completion, our team delivers precision, innovation, and unmatched
 							craftsmanship.
@@ -84,7 +84,7 @@ export default function Hero() {
 							transition={{delay: 0.8, duration: 0.6}}
 							className='text-gray-300 leading-relaxed'>
 							Serving "Toronto, Mississauga, Oakville, and the Niagara Region",
-							we’ve earned the trust of developers, architects, and owners
+							we've earned the trust of developers, architects, and owners
 							through "transparent collaboration" and "uncompromising
 							standards".
 						</motion.p>

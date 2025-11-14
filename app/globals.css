@@ -401,6 +401,18 @@ section.relative.min-h-screen p {
 .font-geist {
 	font-family: var(--font-geist-sans) !important;
 }
+
+/* Ensure active nav link uses accent color */
+nav a[aria-current="page"] {
+	color: var(--accent) !important;
+	font-weight: 700;
+}
+
+/* Fallback active class for navigation (highest priority) */
+.active-nav {
+	color: var(--accent) !important;
+	font-weight: 700 !important;
+}
 .animation-delay-3 {
 	animation-delay: 0.3s;
 }
