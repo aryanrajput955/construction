@@ -1,7 +1,24 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import {useState, useEffect} from 'react'
 
 export default function Footer() {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // Check for saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'dark') {
+      setIsDark(true)
+      document.documentElement.classList.add('dark')
+    } else {
+      setIsDark(false)
+      document.documentElement.classList.remove('dark')
+    }
+  }, [])
+
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
@@ -21,11 +38,11 @@ export default function Footer() {
             <div className="animate-fade-in-up">
               <Link href="/" className="flex items-center mb-4 sm:mb-6">
                 <Image
-                  src="/logo2.png"
+                  src={isDark ? '/logo2.png' : '/blacklogo.png'}
                   alt="Front Ridge Logo"
                   width={140}
                   height={140}
-                  className="rounded-md sm:w-[160px] sm:h-[160px]"
+                  className="rounded-md sm:w-[160px] sm:h-[160px] transition-opacity duration-300"
                 />
               </Link>
               <p className="text-gray-400 text-sm leading-relaxed -mt-10 sm:-mt-16">
